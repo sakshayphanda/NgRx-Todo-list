@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable} from 'rxjs';
+import { TodoActionTypes } from './shared/enums/TodoActionTypes';
+import { IAction } from './interfaces/IAction';
+import { TodoAction } from './actions/todo.actions';
+import { Languages } from './shared/enums/Languages';
+import { Selectors } from './shared/enums/Selectors';
 
 interface AppState {
   message: string;
@@ -12,26 +16,23 @@ interface AppState {
   styleUrls: ['./app.component.sass']
 })
 export class AppComponent {
-  title = 'ngrx-todo';
   message;
   actionData: IAction;
 
   constructor(private store: Store<AppState>) {
-    this.store.select('message').subscribe(
+    this.store.select(Selectors.MESSAGE).subscribe(
       message => {
         this.message = message;
-        console.log(message);
       }
     );
 
-    this.french();
+    this.translate(Languages.SPANISH);
   }
 
-  spanish() {
-    this.store.dispatch({type: 'SPANISH'});
-  }
-
-  french() {
-    this.store.dispatch({type: 'FRENCH'});
+  translate(language) {
+    const actionData: IAction = {
+      type : language
+    };
+    this.store.dispatch(actionData);
   }
 }

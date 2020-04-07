@@ -1,12 +1,12 @@
-import { Action } from '@ngrx/store'; // It's an interface which has a attribute name type.
-import { TodoActionTypes } from '../shared/enums/TodoActionTypes';
+import { IAction } from '../interfaces/IAction';
 
-export interface ActionParent extends Action {
+
+export class TodoAction implements IAction {
   payload?: any;
-}
+  type: string;
 
-
-export class TodoAdd implements ActionParent {
-  payload?: any;
-  type: string = TodoActionTypes.Add;
+  constructor(type, payload) {
+    this.type = type;
+    this.payload = payload;
+  }
 }

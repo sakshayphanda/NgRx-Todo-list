@@ -1,14 +1,28 @@
-import { Action } from '@ngrx/store';
+import { TodoActionTypes } from '../shared/enums/TodoActionTypes';
+import { IAction } from '../interfaces/IAction';
 
-export function TodoReducer(state = [1, 2, 3], action: Action) {
-  switch(action.type) {
-    case 'ADD':
-      return newPosts(state, action)
-    case 'REMOVE':
-      return state = [1, 2];
+
+export const initialState = [];
+
+export function TodoReducer(state = initialState, action: IAction) {
+  switch (action.type) {
+    case TodoActionTypes.ADD:
+      return addPosts(state, action.payload);
+    case TodoActionTypes.DELETE:
+      return deletePosts(state, action.payload);
+    default:
+      return state;
   }
 }
 
-const newPosts = (state, payload) => {
+const addPosts = (state, payload) => {
+  state = [...state, payload];
+  return state;
+};
 
-}
+const deletePosts = (state, payload: number) => {
+  const newState = [...state];
+  newState.splice(payload, 1);
+  return newState;
+};
+

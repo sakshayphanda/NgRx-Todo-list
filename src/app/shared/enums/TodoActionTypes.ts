@@ -1,5 +1,6 @@
 
 export enum TodoActionTypes {
-  Add = 'ADD',
-  REMOVE = 'REMOVE'
+  ADD = 'ADD',
+  UPDATE = 'UPDATE',
+  DELETE = 'DELETE'
 }

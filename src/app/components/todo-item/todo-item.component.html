@@ -1,0 +1,12 @@
+<ng-container *ngFor="let item of todoList; let i = index">
+  <div class="item">
+    <input readonly placeholder="Enter an item name" [value]="item">
+    <button (click)="deleteItem(i)">Remove</button>
+  </div>
+</ng-container>
+
+
+<div class="item">
+  <input placeholder="Enter an item name" [value]="itemName" (change)="itemName = $event.target.value">
+  <button (click)="addItem()">Add Item</button>
+</div>
